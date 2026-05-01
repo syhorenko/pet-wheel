@@ -4,6 +4,13 @@ struct WheelView: View {
     @ObservedObject var viewModel: WheelViewModel
     let onDismiss: () -> Void
 
+    private var showResultBinding: Binding<Bool> {
+        Binding(
+            get: { viewModel.showResult },
+            set: { if !$0 { viewModel.dismissResult() } }
+        )
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -32,7 +39,7 @@ struct WheelView: View {
                         .foregroundStyle(Color.neonPurple)
                 }
             }
-            .sheet(isPresented: $viewModel.showResult) {
+            .sheet(isPresented: showResultBinding) {
                 if let activity = viewModel.selectedActivity {
                     ActivityResultView(
                         pet: viewModel.pet,
