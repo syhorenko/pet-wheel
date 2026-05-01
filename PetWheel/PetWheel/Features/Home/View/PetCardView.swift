@@ -10,7 +10,10 @@ struct PetCardView: View {
             HStack(spacing: 16) {
                 ZStack {
                     Circle()
-                        .fill(Color.accentColor.opacity(0.15))
+                        .fill(Color.neonPurple.opacity(0.15))
+                        .frame(width: 60, height: 60)
+                    Circle()
+                        .strokeBorder(Color.neonPurple.opacity(0.30), lineWidth: 1)
                         .frame(width: 60, height: 60)
                     Text(pet.type.emoji)
                         .font(.system(size: 30))
@@ -19,24 +22,24 @@ struct PetCardView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(pet.name)
                         .font(.headline)
-                        .foregroundStyle(.primary)
+                        .foregroundStyle(.white)
                     HStack(spacing: 6) {
                         Text(pet.type.displayName)
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color.mutedText)
                         if let age = pet.age {
                             Text("•")
-                                .foregroundStyle(.secondary)
                                 .font(.caption)
+                                .foregroundStyle(Color.mutedText)
                             Text(age)
                                 .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(Color.mutedText)
                         }
                     }
                     if let last = pet.activityHistory.first {
                         Text("Last: \(last.emoji) \(last.name)")
                             .font(.caption2)
-                            .foregroundStyle(.tertiary)
+                            .foregroundStyle(Color.mutedText.opacity(0.6))
                     }
                 }
 
@@ -47,13 +50,13 @@ struct PetCardView: View {
                 } label: {
                     Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
                         .font(.title2)
-                        .foregroundStyle(Color.accentColor)
+                        .foregroundStyle(Color.neonPurple)
                 }
                 .buttonStyle(.plain)
 
                 Image(systemName: "chevron.right")
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(Color.white.opacity(0.20))
             }
             .padding(16)
         }

@@ -17,15 +17,21 @@ struct WheelSpinnerView: View {
                 )
             }
 
-            // Center hub
             Circle()
-                .fill(Color(.systemBackground))
-                .frame(width: 48, height: 48)
-                .shadow(radius: 4)
+                .strokeBorder(Color.white.opacity(0.10), lineWidth: 2)
+
+            Circle()
+                .fill(Color.appBackground)
+                .frame(width: 56, height: 56)
+                .shadow(color: Color.neonPurple.opacity(0.55), radius: 10)
+
+            Circle()
+                .strokeBorder(Color.neonPurple.opacity(0.55), lineWidth: 1.5)
+                .frame(width: 56, height: 56)
 
             Image(systemName: "pawprint.fill")
-                .foregroundStyle(Color.accentColor)
-                .font(.title3)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundStyle(Color.neonPurple)
         }
         .rotationEffect(.degrees(rotationAngle))
     }
@@ -37,20 +43,12 @@ struct WheelSliceView: View {
     let total: Int
     let sliceDegrees: Double
 
-    private var startAngle: Angle {
-        .degrees(sliceDegrees * Double(index) - 90)
-    }
-
-    private var endAngle: Angle {
-        .degrees(sliceDegrees * Double(index + 1) - 90)
-    }
-
-    private var midAngle: Angle {
-        .degrees(sliceDegrees * Double(index) + sliceDegrees / 2 - 90)
-    }
+    private var startAngle: Angle { .degrees(sliceDegrees * Double(index) - 90) }
+    private var endAngle: Angle { .degrees(sliceDegrees * Double(index + 1) - 90) }
+    private var midAngle: Angle { .degrees(sliceDegrees * Double(index) + sliceDegrees / 2 - 90) }
 
     private var sliceColor: Color {
-        Color.wheelColors[index % Color.wheelColors.count].opacity(0.85)
+        Color.wheelColors[index % Color.wheelColors.count]
     }
 
     var body: some View {
@@ -61,16 +59,17 @@ struct WheelSliceView: View {
             ZStack {
                 Path { path in
                     path.move(to: center)
-                    path.addArc(
-                        center: center,
-                        radius: radius,
-                        startAngle: startAngle,
-                        endAngle: endAngle,
-                        clockwise: false
-                    )
+                    path.addArc(center: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: false)
                     path.closeSubpath()
                 }
                 .fill(sliceColor)
+
+                Path { path in
+                    path.move(to: center)
+                    path.addArc(center: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: false)
+                    path.closeSubpath()
+                }
+                .stroke(Color.black.opacity(0.25), lineWidth: 1.5)
 
                 let labelRadius = radius * 0.65
                 let labelX = center.x + labelRadius * cos(midAngle.radians)
@@ -89,9 +88,9 @@ struct WheelPointerView: View {
     var body: some View {
         VStack(spacing: 0) {
             Image(systemName: "arrowtriangle.down.fill")
-                .font(.system(size: 28))
-                .foregroundStyle(Color.primary)
-                .shadow(radius: 2)
+                .font(.system(size: 26, weight: .bold))
+                .foregroundStyle(.white)
+                .shadow(color: Color.neonPurple.opacity(0.9), radius: 8)
             Spacer()
         }
     }

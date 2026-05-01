@@ -5,11 +5,14 @@ struct HomeView: View {
     @EnvironmentObject var appCoordinator: AppCoordinator
 
     var body: some View {
-        Group {
-            if viewModel.pets.isEmpty {
-                EmptyPetsView()
-            } else {
-                petList
+        ZStack {
+            Color.appBackground.ignoresSafeArea()
+            Group {
+                if viewModel.pets.isEmpty {
+                    EmptyPetsView()
+                } else {
+                    petList
+                }
             }
         }
         .navigationTitle("My Pets")
@@ -21,6 +24,7 @@ struct HomeView: View {
                 } label: {
                     Image(systemName: "plus.circle.fill")
                         .font(.title3)
+                        .foregroundStyle(Color.neonPurple)
                 }
             }
         }
@@ -47,17 +51,26 @@ struct EmptyPetsView: View {
     @EnvironmentObject var appCoordinator: AppCoordinator
 
     var body: some View {
-        VStack(spacing: 24) {
-            Image(systemName: "pawprint.circle")
-                .font(.system(size: 80))
-                .foregroundStyle(.secondary)
+        VStack(spacing: 28) {
+            ZStack {
+                Circle()
+                    .fill(Color.neonPurple.opacity(0.10))
+                    .frame(width: 120, height: 120)
+                Circle()
+                    .strokeBorder(Color.neonPurple.opacity(0.25), lineWidth: 1)
+                    .frame(width: 120, height: 120)
+                Image(systemName: "pawprint.fill")
+                    .font(.system(size: 48))
+                    .foregroundStyle(Color.neonPurple.opacity(0.7))
+            }
 
             VStack(spacing: 8) {
                 Text("No Pets Yet")
-                    .font(.title2.weight(.semibold))
+                    .font(.title2.weight(.bold))
+                    .foregroundStyle(.white)
                 Text("Add your first pet to get started!")
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.mutedText)
                     .multilineTextAlignment(.center)
             }
 
@@ -65,7 +78,7 @@ struct EmptyPetsView: View {
                 appCoordinator.showAddPet()
             }
             .primaryButtonStyle()
-            .frame(maxWidth: 200)
+            .frame(maxWidth: 220)
         }
         .padding(32)
     }

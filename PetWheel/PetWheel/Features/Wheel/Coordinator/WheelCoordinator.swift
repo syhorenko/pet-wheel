@@ -31,24 +31,36 @@ struct WheelTabView: View {
 
     var body: some View {
         NavigationStack {
-            if coordinator.petService.pets.isEmpty {
-                VStack(spacing: 20) {
-                    Image(systemName: "pawprint.circle")
-                        .font(.system(size: 64))
-                        .foregroundStyle(.secondary)
-                    Text("Add a pet first to use the wheel!")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                    Button("Add a Pet") { coordinator.showAddPet() }
-                        .primaryButtonStyle()
-                        .frame(maxWidth: 200)
+            ZStack {
+                Color.appBackground.ignoresSafeArea()
+
+                if coordinator.petService.pets.isEmpty {
+                    VStack(spacing: 24) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.neonPurple.opacity(0.10))
+                                .frame(width: 100, height: 100)
+                            Circle()
+                                .strokeBorder(Color.neonPurple.opacity(0.22), lineWidth: 1)
+                                .frame(width: 100, height: 100)
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                                .font(.system(size: 38))
+                                .foregroundStyle(Color.neonPurple.opacity(0.7))
+                        }
+                        Text("Add a pet first to use the wheel!")
+                            .font(.headline)
+                            .foregroundStyle(Color.mutedText)
+                            .multilineTextAlignment(.center)
+                        Button("Add a Pet") { coordinator.showAddPet() }
+                            .primaryButtonStyle()
+                            .frame(maxWidth: 220)
+                    }
+                    .padding()
+                } else {
+                    WheelPetPickerView(coordinator: coordinator)
                 }
-                .padding()
-                .navigationTitle("Activity Wheel")
-            } else {
-                WheelPetPickerView(coordinator: coordinator)
             }
+            .navigationTitle("Activity Wheel")
         }
     }
 }
@@ -61,7 +73,7 @@ struct WheelPetPickerView: View {
             VStack(spacing: 12) {
                 Text("Pick a pet to spin for!")
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.mutedText)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 4)
 
@@ -70,15 +82,27 @@ struct WheelPetPickerView: View {
                         coordinator.showWheel(for: pet)
                     } label: {
                         HStack(spacing: 16) {
-                            Text(pet.type.emoji).font(.largeTitle)
-                            VStack(alignment: .leading) {
-                                Text(pet.name).font(.headline).foregroundStyle(.primary)
-                                Text(pet.type.displayName).font(.caption).foregroundStyle(.secondary)
+                            ZStack {
+                                Circle()
+                                    .fill(Color.neonPurple.opacity(0.15))
+                                    .frame(width: 52, height: 52)
+                                Circle()
+                                    .strokeBorder(Color.neonPurple.opacity(0.28), lineWidth: 1)
+                                    .frame(width: 52, height: 52)
+                                Text(pet.type.emoji).font(.title2)
+                            }
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(pet.name)
+                                    .font(.headline)
+                                    .foregroundStyle(.white)
+                                Text(pet.type.displayName)
+                                    .font(.caption)
+                                    .foregroundStyle(Color.mutedText)
                             }
                             Spacer()
                             Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
                                 .font(.title2)
-                                .foregroundStyle(.accent)
+                                .foregroundStyle(Color.neonPurple)
                         }
                         .padding(16)
                         .cardStyle()
@@ -88,6 +112,5 @@ struct WheelPetPickerView: View {
             }
             .padding(16)
         }
-        .navigationTitle("Activity Wheel")
     }
 }

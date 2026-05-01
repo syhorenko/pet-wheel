@@ -6,44 +6,63 @@ struct AddPetView: View {
 
     var body: some View {
         NavigationStack {
-            Form {
-                Section("Pet Info") {
-                    TextField("Name", text: $viewModel.name)
+            ZStack {
+                Color.appBackground.ignoresSafeArea()
+                Form {
+                    Section {
+                        TextField("Name", text: $viewModel.name)
+                            .foregroundStyle(.white)
+                        typePicker
+                    } header: {
+                        formHeader("Pet Info")
+                    }
+                    .listRowBackground(Color.cardSurface)
+                    .listRowSeparatorTint(Color.white.opacity(0.08))
 
-                    Picker("Type", selection: $viewModel.selectedType) {
-                        ForEach(PetType.allCases) { type in
-                            Label(type.displayName, title: { Text(type.displayName) })
-                                .tag(type)
+                    Section {
+                        Toggle("Add Birthday", isOn: $viewModel.hasBirthday)
+                            .tint(Color.neonPurple)
+                            .foregroundStyle(.white)
+                        if viewModel.hasBirthday {
+                            DatePicker(
+                                "Birthday",
+                                selection: $viewModel.birthday,
+                                in: ...Date(),
+                                displayedComponents: .date
+                            )
+                            .foregroundStyle(.white)
                         }
+                    } header: {
+                        formHeader("Birthday (Optional)")
                     }
-                }
+                    .listRowBackground(Color.cardSurface)
+                    .listRowSeparatorTint(Color.white.opacity(0.08))
 
-                Section("Birthday (Optional)") {
-                    Toggle("Add Birthday", isOn: $viewModel.hasBirthday)
-                    if viewModel.hasBirthday {
-                        DatePicker(
-                            "Birthday",
-                            selection: $viewModel.birthday,
-                            in: ...Date(),
-                            displayedComponents: .date
-                        )
+                    Section {
+                        TextEditor(text: $viewModel.notes)
+                            .frame(minHeight: 80)
+                            .foregroundStyle(.white)
+                            .scrollContentBackground(.hidden)
+                    } header: {
+                        formHeader("Notes (Optional)")
                     }
-                }
+                    .listRowBackground(Color.cardSurface)
 
-                Section("Notes (Optional)") {
-                    TextEditor(text: $viewModel.notes)
-                        .frame(minHeight: 80)
+                    Section {
+                        previewCard
+                    } header: {
+                        formHeader("Preview")
+                    }
+                    .listRowBackground(Color.cardSurface2)
                 }
-
-                Section {
-                    previewCard
-                }
+                .scrollContentBackground(.hidden)
             }
             .navigationTitle("Add a Pet")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { onDismiss() }
+                        .foregroundStyle(Color.mutedText)
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Add") {
@@ -51,17 +70,38 @@ struct AddPetView: View {
                         onDismiss()
                     }
                     .disabled(!viewModel.canSave)
+                    .foregroundStyle(viewModel.canSave ? Color.neonPurple : Color.mutedText)
                     .fontWeight(.semibold)
                 }
             }
         }
     }
 
+    private func formHeader(_ title: String) -> some View {
+        Text(title)
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(Color.mutedText)
+            .textCase(nil)
+    }
+
+    private var typePicker: some View {
+        Picker("Type", selection: $viewModel.selectedType) {
+            ForEach(PetType.allCases) { type in
+                Text("\(type.emoji) \(type.displayName)").tag(type)
+            }
+        }
+        .foregroundStyle(.white)
+        .tint(Color.neonPurple)
+    }
+
     private var previewCard: some View {
         HStack(spacing: 16) {
             ZStack {
                 Circle()
-                    .fill(Color.accentColor.opacity(0.15))
+                    .fill(Color.neonPurple.opacity(0.15))
+                    .frame(width: 48, height: 48)
+                Circle()
+                    .strokeBorder(Color.neonPurple.opacity(0.30), lineWidth: 1)
                     .frame(width: 48, height: 48)
                 Text(viewModel.selectedType.emoji)
                     .font(.title2)
@@ -69,10 +109,10 @@ struct AddPetView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(viewModel.name.isEmpty ? "Pet Name" : viewModel.name)
                     .font(.headline)
-                    .foregroundStyle(viewModel.name.isEmpty ? .secondary : .primary)
+                    .foregroundStyle(viewModel.name.isEmpty ? Color.mutedText : .white)
                 Text(viewModel.selectedType.displayName)
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.mutedText)
             }
         }
         .padding(.vertical, 4)
