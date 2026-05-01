@@ -1,0 +1,714 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA2000000000000000000001 /* PetWheelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000001 /* PetWheelApp.swift */; };
+		AA2000000000000000000002 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000002 /* AppCoordinator.swift */; };
+		AA2000000000000000000003 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000003 /* Coordinator.swift */; };
+		AA2000000000000000000004 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000004 /* NavigationRouter.swift */; };
+		AA2000000000000000000005 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000005 /* Color+Extensions.swift */; };
+		AA2000000000000000000006 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000006 /* View+Extensions.swift */; };
+		AA2000000000000000000007 /* PetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000007 /* PetService.swift */; };
+		AA2000000000000000000008 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000008 /* Pet.swift */; };
+		AA2000000000000000000009 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000009 /* HomeCoordinator.swift */; };
+		AA200000000000000000000A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000A /* HomeViewModel.swift */; };
+		AA200000000000000000000B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000B /* HomeView.swift */; };
+		AA200000000000000000000C /* PetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000C /* PetCardView.swift */; };
+		AA200000000000000000000D /* PetDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000D /* PetDetailCoordinator.swift */; };
+		AA200000000000000000000E /* PetDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000E /* PetDetailViewModel.swift */; };
+		AA200000000000000000000F /* PetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000000F /* PetDetailView.swift */; };
+		AA2000000000000000000010 /* AddPetCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000010 /* AddPetCoordinator.swift */; };
+		AA2000000000000000000011 /* AddPetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000011 /* AddPetViewModel.swift */; };
+		AA2000000000000000000012 /* AddPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000012 /* AddPetView.swift */; };
+		AA2000000000000000000013 /* WheelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000013 /* WheelCoordinator.swift */; };
+		AA2000000000000000000014 /* WheelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000014 /* WheelViewModel.swift */; };
+		AA2000000000000000000015 /* WheelSpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000015 /* WheelSpinnerView.swift */; };
+		AA2000000000000000000016 /* WheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000016 /* WheelView.swift */; };
+		AA2000000000000000000017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000017 /* Assets.xcassets */; };
+		AA200000000000000000001B /* PetModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000001B /* PetModelTests.swift */; };
+		AA200000000000000000001C /* AddPetViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000001C /* AddPetViewModelTests.swift */; };
+		AA200000000000000000001D /* WheelViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100000000000000000001D /* WheelViewModelTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA1000000000000000000001 /* PetWheelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWheelApp.swift; sourceTree = "<group>"; };
+		AA1000000000000000000002 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		AA1000000000000000000003 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		AA1000000000000000000004 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
+		AA1000000000000000000005 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		AA1000000000000000000006 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		AA1000000000000000000007 /* PetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetService.swift; sourceTree = "<group>"; };
+		AA1000000000000000000008 /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
+		AA1000000000000000000009 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		AA100000000000000000000A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		AA100000000000000000000B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AA100000000000000000000C /* PetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCardView.swift; sourceTree = "<group>"; };
+		AA100000000000000000000D /* PetDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailCoordinator.swift; sourceTree = "<group>"; };
+		AA100000000000000000000E /* PetDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailViewModel.swift; sourceTree = "<group>"; };
+		AA100000000000000000000F /* PetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailView.swift; sourceTree = "<group>"; };
+		AA1000000000000000000010 /* AddPetCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetCoordinator.swift; sourceTree = "<group>"; };
+		AA1000000000000000000011 /* AddPetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetViewModel.swift; sourceTree = "<group>"; };
+		AA1000000000000000000012 /* AddPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetView.swift; sourceTree = "<group>"; };
+		AA1000000000000000000013 /* WheelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelCoordinator.swift; sourceTree = "<group>"; };
+		AA1000000000000000000014 /* WheelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelViewModel.swift; sourceTree = "<group>"; };
+		AA1000000000000000000015 /* WheelSpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelSpinnerView.swift; sourceTree = "<group>"; };
+		AA1000000000000000000016 /* WheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelView.swift; sourceTree = "<group>"; };
+		AA1000000000000000000017 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA1000000000000000000018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA1000000000000000000019 /* PetWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA100000000000000000001A /* PetWheelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetWheelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA100000000000000000001B /* PetModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetModelTests.swift; sourceTree = "<group>"; };
+		AA100000000000000000001C /* AddPetViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetViewModelTests.swift; sourceTree = "<group>"; };
+		AA100000000000000000001D /* WheelViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelViewModelTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA4000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA4000000000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA3000000000000000000001 /* MainGroup */ = {
+			isa = PBXGroup;
+			children = (
+				AA3000000000000000000002 /* PetWheel */,
+				AA300000000000000000001C /* PetWheelTests */,
+				AA300000000000000000001B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000002 /* PetWheel */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000001 /* PetWheelApp.swift */,
+				AA3000000000000000000003 /* Application */,
+				AA3000000000000000000004 /* Core */,
+				AA3000000000000000000008 /* Features */,
+				AA300000000000000000001A /* Resources */,
+			);
+			path = PetWheel;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000003 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000002 /* AppCoordinator.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000004 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				AA3000000000000000000005 /* Coordinators */,
+				AA3000000000000000000006 /* Extensions */,
+				AA3000000000000000000007 /* Services */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000005 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000003 /* Coordinator.swift */,
+				AA1000000000000000000004 /* NavigationRouter.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000006 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000005 /* Color+Extensions.swift */,
+				AA1000000000000000000006 /* View+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000007 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000007 /* PetService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000008 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				AA3000000000000000000009 /* Home */,
+				AA300000000000000000000E /* PetDetail */,
+				AA3000000000000000000012 /* AddPet */,
+				AA3000000000000000000016 /* Wheel */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000009 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AA300000000000000000000B /* Model */,
+				AA300000000000000000000A /* Coordinator */,
+				AA300000000000000000000C /* ViewModel */,
+				AA300000000000000000000D /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AA300000000000000000000A /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000009 /* HomeCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AA300000000000000000000B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000008 /* Pet.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AA300000000000000000000C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AA100000000000000000000A /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AA300000000000000000000D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA100000000000000000000B /* HomeView.swift */,
+				AA100000000000000000000C /* PetCardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA300000000000000000000E /* PetDetail */ = {
+			isa = PBXGroup;
+			children = (
+				AA300000000000000000000F /* Coordinator */,
+				AA3000000000000000000010 /* ViewModel */,
+				AA3000000000000000000011 /* View */,
+			);
+			path = PetDetail;
+			sourceTree = "<group>";
+		};
+		AA300000000000000000000F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AA100000000000000000000D /* PetDetailCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000010 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AA100000000000000000000E /* PetDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000011 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA100000000000000000000F /* PetDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000012 /* AddPet */ = {
+			isa = PBXGroup;
+			children = (
+				AA3000000000000000000013 /* Coordinator */,
+				AA3000000000000000000014 /* ViewModel */,
+				AA3000000000000000000015 /* View */,
+			);
+			path = AddPet;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000013 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000010 /* AddPetCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000014 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000011 /* AddPetViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000015 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000012 /* AddPetView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000016 /* Wheel */ = {
+			isa = PBXGroup;
+			children = (
+				AA3000000000000000000017 /* Coordinator */,
+				AA3000000000000000000018 /* ViewModel */,
+				AA3000000000000000000019 /* View */,
+			);
+			path = Wheel;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000017 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000013 /* WheelCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000018 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000014 /* WheelViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000019 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000015 /* WheelSpinnerView.swift */,
+				AA1000000000000000000016 /* WheelView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA300000000000000000001A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000017 /* Assets.xcassets */,
+				AA1000000000000000000018 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AA300000000000000000001B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA1000000000000000000019 /* PetWheel.app */,
+				AA100000000000000000001A /* PetWheelTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA300000000000000000001C /* PetWheelTests */ = {
+			isa = PBXGroup;
+			children = (
+				AA100000000000000000001B /* PetModelTests.swift */,
+				AA100000000000000000001C /* AddPetViewModelTests.swift */,
+				AA100000000000000000001D /* WheelViewModelTests.swift */,
+			);
+			path = PetWheelTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA5000000000000000000001 /* PetWheel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA6000000000000000000002 /* Build configuration list for PBXNativeTarget "PetWheel" */;
+			buildPhases = (
+				AA4000000000000000000001 /* Sources */,
+				AA4000000000000000000002 /* Resources */,
+				AA4000000000000000000003 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PetWheel;
+			productName = PetWheel;
+			productReference = AA1000000000000000000019 /* PetWheel.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA5000000000000000000002 /* PetWheelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA6000000000000000000003 /* Build configuration list for PBXNativeTarget "PetWheelTests" */;
+			buildPhases = (
+				AA4000000000000000000004 /* Sources */,
+				AA4000000000000000000005 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA9000000000000000000001 /* PBXTargetDependency */,
+			);
+			name = PetWheelTests;
+			productName = PetWheelTests;
+			productReference = AA100000000000000000001A /* PetWheelTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA8000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					AA5000000000000000000001 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					AA5000000000000000000002 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = AA5000000000000000000001;
+					};
+				};
+			};
+			buildConfigurationList = AA6000000000000000000001 /* Build configuration list for PBXProject "PetWheel" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA3000000000000000000001;
+			productRefGroup = AA300000000000000000001B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA5000000000000000000001 /* PetWheel */,
+				AA5000000000000000000002 /* PetWheelTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA4000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA2000000000000000000017 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA4000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA2000000000000000000001 /* PetWheelApp.swift in Sources */,
+				AA2000000000000000000002 /* AppCoordinator.swift in Sources */,
+				AA2000000000000000000003 /* Coordinator.swift in Sources */,
+				AA2000000000000000000004 /* NavigationRouter.swift in Sources */,
+				AA2000000000000000000005 /* Color+Extensions.swift in Sources */,
+				AA2000000000000000000006 /* View+Extensions.swift in Sources */,
+				AA2000000000000000000007 /* PetService.swift in Sources */,
+				AA2000000000000000000008 /* Pet.swift in Sources */,
+				AA2000000000000000000009 /* HomeCoordinator.swift in Sources */,
+				AA200000000000000000000A /* HomeViewModel.swift in Sources */,
+				AA200000000000000000000B /* HomeView.swift in Sources */,
+				AA200000000000000000000C /* PetCardView.swift in Sources */,
+				AA200000000000000000000D /* PetDetailCoordinator.swift in Sources */,
+				AA200000000000000000000E /* PetDetailViewModel.swift in Sources */,
+				AA200000000000000000000F /* PetDetailView.swift in Sources */,
+				AA2000000000000000000010 /* AddPetCoordinator.swift in Sources */,
+				AA2000000000000000000011 /* AddPetViewModel.swift in Sources */,
+				AA2000000000000000000012 /* AddPetView.swift in Sources */,
+				AA2000000000000000000013 /* WheelCoordinator.swift in Sources */,
+				AA2000000000000000000014 /* WheelViewModel.swift in Sources */,
+				AA2000000000000000000015 /* WheelSpinnerView.swift in Sources */,
+				AA2000000000000000000016 /* WheelView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA4000000000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA200000000000000000001B /* PetModelTests.swift in Sources */,
+				AA200000000000000000001C /* AddPetViewModelTests.swift in Sources */,
+				AA200000000000000000001D /* WheelViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA9000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA5000000000000000000001 /* PetWheel */;
+			targetProxy = AA9000000000000000000002 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXContainerItemProxy section */
+		AA9000000000000000000002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA8000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA5000000000000000000001;
+			remoteInfo = PetWheel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin XCBuildConfiguration section */
+		AA7000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_CYCLE = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA7000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_CYCLE = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA7000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PetWheel/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.petwheel.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA7000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PetWheel/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.petwheel.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AA7000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.petwheel.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PetWheel.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PetWheel";
+			};
+			name = Debug;
+		};
+		AA7000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.petwheel.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PetWheel.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PetWheel";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA6000000000000000000001 /* Build configuration list for PBXProject "PetWheel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA7000000000000000000001 /* Debug */,
+				AA7000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA6000000000000000000002 /* Build configuration list for PBXNativeTarget "PetWheel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA7000000000000000000003 /* Debug */,
+				AA7000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA6000000000000000000003 /* Build configuration list for PBXNativeTarget "PetWheelTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA7000000000000000000005 /* Debug */,
+				AA7000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = AA8000000000000000000001 /* Project object */;
+}
