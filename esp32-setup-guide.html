@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESP32 Cat Wheel — Hardware Setup Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #181c24;
+    --border: #1e2330;
+    --accent: #00e5ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #e8eaf0;
+    --muted: #5a6070;
+    --warn: #ffcc00;
+    --danger: #ff4757;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .project-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .project-label::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: #fff;
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .subtitle {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14px;
+    font-family: var(--mono);
+  }
+
+  /* Phase blocks */
+  .phase {
+    margin-bottom: 48px;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .phase-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    padding: 4px 10px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  .phase h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+
+  /* Step cards */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .step {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .step::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .step:hover {
+    border-color: rgba(0, 229, 255, 0.3);
+  }
+
+  .step:hover::before {
+    opacity: 1;
+  }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .step h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .step p {
+    font-size: 13px;
+    color: #8892a4;
+    line-height: 1.7;
+    font-family: var(--mono);
+  }
+
+  /* Pin table */
+  .pin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  .pin-table thead tr {
+    background: var(--surface2);
+  }
+
+  .pin-table th {
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pin-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #8892a4;
+    vertical-align: middle;
+  }
+
+  .pin-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .pin-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .pin-ky { color: var(--accent2); font-weight: 700; }
+  .pin-esp { color: var(--accent); font-weight: 700; }
+  .pin-wire { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+  .wire-red { background: #ff4757; }
+  .wire-black { background: #444; border: 1px solid #666; }
+  .wire-yellow { background: #ffcc00; }
+
+  /* Diagram */
+  .diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px;
+    margin: 16px 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 2;
+    overflow-x: auto;
+  }
+
+  .diagram pre {
+    color: #8892a4;
+  }
+
+  .diagram .d-accent { color: var(--accent); }
+  .diagram .d-orange { color: var(--accent2); }
+  .diagram .d-green { color: var(--accent3); }
+
+  /* Warning / info boxes */
+  .callout {
+    padding: 16px 20px;
+    border-left: 3px solid;
+    margin: 16px 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .callout-warn {
+    border-color: var(--warn);
+    background: rgba(255, 204, 0, 0.05);
+    color: #b8a040;
+  }
+
+  .callout-danger {
+    border-color: var(--danger);
+    background: rgba(255, 71, 87, 0.05);
+    color: #c04040;
+  }
+
+  .callout-info {
+    border-color: var(--accent);
+    background: rgba(0, 229, 255, 0.05);
+    color: #4a9aaa;
+  }
+
+  .callout-ok {
+    border-color: var(--accent3);
+    background: rgba(127, 255, 107, 0.05);
+    color: #5a9a50;
+  }
+
+  .callout strong {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: 0.6;
+  }
+
+  /* Code block */
+  .code-block {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.8;
+    overflow-x: auto;
+    margin: 12px 0;
+    position: relative;
+  }
+
+  .code-block .label {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .code-block .kw { color: #ff79c6; }
+  .code-block .fn { color: #50fa7b; }
+  .code-block .str { color: #f1fa8c; }
+  .code-block .cm { color: #6272a4; }
+  .code-block .num { color: #bd93f9; }
+
+  /* Checklist */
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #8892a4;
+    padding: 10px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .check-item::before {
+    content: '○';
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Section divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* Tag pill */
+  .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .tag-required { background: rgba(255,71,87,0.15); color: var(--danger); }
+  .tag-optional { background: rgba(0,229,255,0.1); color: var(--accent); }
+
+  /* Inline highlight */
+  code {
+    font-family: var(--mono);
+    background: rgba(0,229,255,0.08);
+    color: var(--accent);
+    padding: 1px 6px;
+    font-size: 0.9em;
+  }
+
+  /* Progress tracker at top */
+  .phase-nav {
+    display: flex;
+    gap: 0;
+    margin-bottom: 48px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .phase-nav-item {
+    flex: 1;
+    min-width: 100px;
+    padding: 10px 8px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--muted);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .phase-nav-item:nth-child(1) { border-bottom-color: var(--accent2); color: var(--accent2); }
+  .phase-nav-item:nth-child(2) { border-bottom-color: var(--warn); color: var(--warn); opacity: 0.8; }
+  .phase-nav-item:nth-child(3) { border-bottom-color: var(--accent); color: var(--accent); opacity: 0.8; }
+  .phase-nav-item:nth-child(4) { border-bottom-color: var(--accent3); color: var(--accent3); opacity: 0.8; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="project-label">Cat Wheel Tracker — Hardware Guide</div>
+    <h1>Setup Guide<br><span>ESP32 + KY-003</span></h1>
+    <p class="subtitle">// wiring → drivers → IDE → first flash</p>
+  </header>
+
+  <div class="phase-nav">
+    <div class="phase-nav-item">① Parts</div>
+    <div class="phase-nav-item">② Wiring</div>
+    <div class="phase-nav-item">③ Mac Setup</div>
+    <div class="phase-nav-item">④ First Flash</div>
+  </div>
+
+
+  <!-- PHASE 0: WHAT YOU HAVE -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 00</div>
+      <h2>What You Have</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">COMPONENT 01</div>
+        <h3>ESP32 WROOM-32 DevKit</h3>
+        <p>The brain. USB-C powered, dual-core, WiFi + BLE built-in.<br>
+        Has 38 pins, 3.3V logic, powered by USB from your Mac during dev.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">COMPONENT 02</div>
+        <h3>KY-003 Hall Effect Sensor Module</h3>
+        <p>3-pin module: VCC, GND, Signal (S).<br>
+        Outputs HIGH normally → drops to LOW when magnet is close.<br>
+        Operating voltage: 3.3V–5V (we'll use 3.3V from ESP32).</p>
+      </div>
+      <div class="step">
+        <div class="step-num">COMPONENT 03 <span class="tag tag-required">REQUIRED — BUY THIS</span></div>
+        <h3>Small Neodymium Magnet</h3>
+        <p>Without a magnet the sensor does nothing.<br>
+        Any small disc/cylinder neodymium magnet works (3mm–8mm diameter).<br>
+        Available at hardware stores, Amazon, or AliExpress.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">ALSO NEEDED</div>
+        <h3>3× Jumper Wires (Female-to-Female)</h3>
+        <p>To connect KY-003 pins to ESP32 GPIO pins.<br>
+        Color convention: Red=VCC, Black=GND, Yellow/Green=Signal.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+
+  <!-- PHASE 1: WIRING -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 01</div>
+      <h2>Wiring the KY-003 to ESP32</h2>
+    </div>
+
+    <div class="callout callout-danger">
+      <strong>⚡ Before wiring</strong>
+      ESP32 must be UNPLUGGED from USB while connecting wires. Always wire first, power second.
+    </div>
+
+    <div class="step">
+      <div class="step-num">PIN MAP</div>
+      <h3>3-Wire Connection</h3>
+      <table class="pin-table">
+        <thead>
+          <tr>
+            <th>KY-003 Pin</th>
+            <th>Wire Color</th>
+            <th>ESP32 Pin</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pin-ky">S (Signal)</td>
+            <td><span class="pin-wire wire-yellow"></span>Yellow</td>
+            <td class="pin-esp">GPIO 4</td>
+            <td>Rotation pulse input</td>
+          </tr>
+          <tr>
+            <td class="pin-ky">VCC (+)</td>
+            <td><span class="pin-wire wire-red"></span>Red</td>
+            <td class="pin-esp">3V3</td>
+            <td>Power supply</td>
+          </tr>
+          <tr>
+            <td class="pin-ky">GND (−)</td>
+            <td><span class="pin-wire wire-black"></span>Black</td>
+            <td class="pin-esp">GND</td>
+            <td>Ground</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>⚠ Voltage note</strong>
+      Use 3V3 pin (not 5V / VIN). The KY-003 works at 3.3V and ESP32 GPIO is 3.3V logic. Using 5V on the signal line risks damaging the GPIO pin over time.
+    </div>
+
+    <div class="step">
+      <div class="step-num">VISUAL DIAGRAM</div>
+      <h3>Connection Map</h3>
+      <div class="diagram">
+        <pre>
+  KY-003 Module              ESP32 DevKit
+  ┌─────────────┐            ┌─────────────────────┐
+  │             │            │                     │
+  │  [S] ───────┼────yellow──┼── GPIO 4  (pin 26)  │
+  │  [+] ───────┼────red─────┼── 3V3     (pin 2 )  │
+  │  [-] ───────┼────black───┼── GND     (pin 1 )  │
+  │             │            │                     │
+  └─────────────┘            └─────────────────────┘
+        </pre>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <strong>ℹ GPIO 4 location on DevKit</strong>
+      On most ESP32 WROOM DevKit boards, pin labels are printed on the board. Look for "D4" or "GPIO4" on the left side of the board (when USB port faces down). GND and 3V3 are clearly labeled near the top.
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>⚠ KY-003 pin label orientation</strong>
+      The KY-003 module has 3 pins. The label order printed on the board is: S — middle — minus (−). From left to right: S (signal), VCC (+), GND (−). Double-check against the text printed on your specific module before connecting.
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+
+  <!-- PHASE 2: MAC SETUP -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 02</div>
+      <h2>Mac Setup — Software</h2>
+    </div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">STEP 01</div>
+        <h3>Install Arduino IDE 2</h3>
+        <p>Download from: <code>arduino.cc/en/software</code><br>
+        Download the macOS version (.dmg), open it, drag to Applications.<br>
+        This is the simplest IDE for ESP32 development to start.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">STEP 02</div>
+        <h3>Add ESP32 Board Support</h3>
+        <p>Arduino IDE doesn't know about ESP32 by default. You need to add it.</p>
+        <div class="code-block">
+          <span class="label">Arduino IDE → Preferences</span>
+          <span class="cm">// Open: Arduino IDE → Preferences (⌘,)</span><br>
+          <span class="cm">// Find: "Additional boards manager URLs"</span><br>
+          <span class="cm">// Add this URL:</span><br><br>
+          <span class="str">https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json</span>
+        </div>
+        <p>Then: <code>Tools → Board → Boards Manager</code> → search <code>esp32</code> → Install <strong>"esp32 by Espressif Systems"</strong></p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">STEP 03</div>
+        <h3>Install USB Driver (CP2102 or CH340)</h3>
+        <p>Most ESP32 DevKit boards use a CP2102 or CH340 USB-to-Serial chip.<br>
+        macOS Ventura+ may detect it automatically. If not:</p>
+        <p><br><strong>CP2102:</strong> Search "Silicon Labs CP210x Mac driver"<br>
+        <strong>CH340:</strong> Search "CH340 driver Mac" → install from manufacturer</p>
+        <div class="callout callout-info" style="margin-top:12px">
+          <strong>ℹ How to check which chip you have</strong>
+          Look at the small chip near the USB port on the ESP32 board. CP2102 = marked "CP2102". CH340 = marked "CH340G". If unsure, install both drivers — they won't conflict.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">STEP 04</div>
+        <h3>Plug in ESP32 via USB-C</h3>
+        <p>Connect ESP32 to Mac using USB-C cable.<br>
+        The power LED on the board should light up.<br><br>
+        Then verify Mac sees it:<br>
+        <code>Tools → Port</code> in Arduino IDE — you should see a port like <code>/dev/cu.usbserial-XXXX</code> or <code>/dev/cu.SLAB_USBtoUART</code></p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">STEP 05</div>
+        <h3>Select the Right Board</h3>
+        <p>In Arduino IDE:<br>
+        <code>Tools → Board → esp32 → ESP32 Dev Module</code><br><br>
+        Leave all other settings as default for now.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+
+  <!-- PHASE 3: FIRST FLASH -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 03</div>
+      <h2>First Flash — Test Everything Works</h2>
+    </div>
+
+    <div class="step">
+      <div class="step-num">TEST SKETCH</div>
+      <h3>Hall Sensor Pulse Counter — Paste this code</h3>
+      <div class="code-block">
+        <span class="label">Arduino Sketch (.ino)</span>
+<span class="kw">const</span> <span class="kw">int</span> HALL_PIN = <span class="num">4</span>;        <span class="cm">// GPIO4 = our sensor signal pin</span>
+<span class="kw">volatile int</span> rotationCount = <span class="num">0</span>; <span class="cm">// incremented in interrupt</span>
+<span class="kw">unsigned long</span> lastTrigger = <span class="num">0</span>;  <span class="cm">// for debounce</span>
+<span class="kw">const int</span> DEBOUNCE_MS = <span class="num">50</span>;     <span class="cm">// ignore triggers within 50ms</span>
+
+<span class="kw">void</span> IRAM_ATTR <span class="fn">onMagnetDetected</span>() {
+  <span class="kw">unsigned long</span> now = <span class="fn">millis</span>();
+  <span class="kw">if</span> (now - lastTrigger > DEBOUNCE_MS) {
+    rotationCount++;
+    lastTrigger = now;
+  }
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial</span>.<span class="fn">begin</span>(<span class="num">115200</span>);
+  <span class="fn">pinMode</span>(HALL_PIN, INPUT_PULLUP);
+  <span class="cm">// Trigger on FALLING = magnet arrives (HIGH→LOW)</span>
+  <span class="fn">attachInterrupt</span>(<span class="fn">digitalPinToInterrupt</span>(HALL_PIN),
+                   onMagnetDetected, FALLING);
+  <span class="fn">Serial</span>.<span class="fn">println</span>(<span class="str">"Hall sensor ready. Pass magnet to test."</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="str">"Rotations: "</span>);
+  <span class="fn">Serial</span>.<span class="fn">println</span>(rotationCount);
+  <span class="fn">delay</span>(<span class="num">500</span>);
+}
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">STEP 01</div>
+        <h3>Upload the sketch</h3>
+        <p>Click the → Upload button (or ⌘U).<br>
+        You may need to hold the BOOT button on the ESP32 for 1-2 seconds when upload starts. Release when you see "Connecting…" in the log.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">STEP 02</div>
+        <h3>Open Serial Monitor</h3>
+        <p><code>Tools → Serial Monitor</code> (or ⌘⇧M)<br>
+        Set baud rate to <code>115200</code><br>
+        You should see "Rotations: 0" printing every 500ms.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">STEP 03</div>
+        <h3>Test the sensor</h3>
+        <p>Pass a magnet close to the KY-003 sensor face (the flat side with the chip).<br>
+        The small LED on the module will light up.<br>
+        Watch the Serial Monitor — "Rotations" should increment by 1 each pass.</p>
+      </div>
+
+    </div>
+
+    <div class="callout callout-ok">
+      <strong>✓ Success criteria</strong>
+      Each magnet pass = exactly +1 rotation count. No double-counting. If you see +2 or +3 per pass, reduce DEBOUNCE_MS to 30. If no trigger at all, check wiring and magnet orientation (try flipping the magnet).
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>⚠ BOOT button note</strong>
+      Some ESP32 boards need you to hold BOOT during upload. If you see "Connecting……___" stuck in the log, hold BOOT, then release once upload starts. You'll only need to do this on first flash — subsequent uploads usually work automatically.
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+
+  <!-- SUMMARY CHECKLIST -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">CHECKLIST</div>
+      <h2>Everything Working — Verify</h2>
+    </div>
+
+    <div class="checklist">
+      <div class="check-item">KY-003 wired: S→GPIO4, VCC→3V3, GND→GND</div>
+      <div class="check-item">Neodymium magnet in hand for testing</div>
+      <div class="check-item">Arduino IDE 2 installed on Mac</div>
+      <div class="check-item">ESP32 board package installed (Espressif)</div>
+      <div class="check-item">USB driver installed — port visible in Tools → Port</div>
+      <div class="check-item">Board set to "ESP32 Dev Module"</div>
+      <div class="check-item">Test sketch uploaded successfully</div>
+      <div class="check-item">Serial Monitor shows rotation count incrementing on magnet pass</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- NEXT STEPS -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-number">NEXT UP</div>
+      <h2>After This Guide</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">NEXT 01</div>
+        <h3>Add BLE — Expose rotation count over Bluetooth</h3>
+        <p>Replace Serial output with a BLE GATT service so your mobile app can subscribe to rotation updates in real time.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">NEXT 02</div>
+        <h3>Build the mobile app BLE client</h3>
+        <p>iOS (CoreBluetooth) or Flutter/React Native. Connect to the ESP32 peripheral, read rotation count, calculate distance from wheel diameter.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">NEXT 03</div>
+        <h3>Physical mounting</h3>
+        <p>Attach magnet to wheel spoke with hot glue or tape. Mount sensor on wheel frame with 5–10mm gap from magnet path. Test full rotation cycle.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
